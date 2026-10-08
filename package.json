@@ -1,0 +1,27 @@
+{
+  "name": "ecommerce-nextjs-ts",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev -p 3000",
+    "build": "next build",
+    "start": "next start -p 3000",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@reduxjs/toolkit": "^1.9.5",
+    "firebase": "^12.19.0",
+    "next": "13.4.10",
+    "nodemailer": "^10.0.1",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-redux": "^8.0.5",
+    "xlsx": "^0.18.5"
+  },
+  "devDependencies": {
+    "@types/node": "^20.6.1",
+    "@types/nodemailer": "^8.0.1",
+    "@types/react": "^18.0.28",
+    "typescript": "^5.1.6"
+  }
+}
