@@ -1,0 +1,2 @@
+function init(){const actions=window.Shopify?.actions;actions&&(actions.updateCart.configure({eventTarget:()=>document.querySelector("theme-drawer#cart-drawer")??document}),actions.openCart.configure({async handler(){const drawer=document.querySelector("theme-drawer#cart-drawer");drawer?.open?drawer.open():window.location.href=Theme.routes.cart_url||"/cart"}}))}window.Shopify?.actions?init():document.addEventListener("DOMContentLoaded",init,{once:!0});
+//# sourceMappingURL=/cdn/shop/t/5/assets/standard-actions-override.js.map?v=171683365447094389611784292207

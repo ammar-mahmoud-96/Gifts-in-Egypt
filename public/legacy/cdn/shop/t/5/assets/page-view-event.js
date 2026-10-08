@@ -1,0 +1,2 @@
+import{PageViewEvent}from"@shopify/events";import{onDocumentReady}from"@theme/utilities";onDocumentReady(function(){const template=document.querySelector("main[data-template]")?.dataset.template||"";document.dispatchEvent(new PageViewEvent({page:{template,title:document.title,url:window.location.href}}))},{once:!0});
+//# sourceMappingURL=/cdn/shop/t/5/assets/page-view-event.js.map?v=12823247316348680231784292207
