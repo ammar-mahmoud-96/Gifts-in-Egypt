@@ -1365,7 +1365,7 @@ rgb(var(--color-border-rgb) / 1.0); --border-radius: 0px;
         
           <div class="ai-marquee-item-atxply2xxaeryd1lawaigenblock557b3093lgtpe">
             
-              25% OFF ALL PRODUCTS - ONE WEEK ONLY
+              Find the perfect gift for every occasion
             
           </div>
           
@@ -1431,7 +1431,7 @@ rgb(var(--color-border-rgb) / 1.0); --border-radius: 0px;
         
           <div class="ai-marquee-item-atxply2xxaeryd1lawaigenblock557b3093lgtpe">
             
-              25% OFF ALL PRODUCTS - ONE WEEK ONLY
+              Find the perfect gift for every occasion
             
           </div>
           
@@ -2279,7 +2279,7 @@ rgb(var(--color-border-rgb) / 1.0); --border-radius: 0px;
     
       
         <div class="hero-carousel-template--20896892846166__hero1_KcpJL9__slide" data-slide-index="1">
-          <video class="hero-carousel-template--20896892846166__hero1_KcpJL9__image" autoplay muted loop playsinline preload="auto" src="/videoplayback.mp4?v=20261008"></video>
+          <video class="hero-carousel-template--20896892846166__hero1_KcpJL9__image" muted loop playsinline preload="none" src="/videoplayback.mp4?v=20261008"></video>
         </div>
       
     
@@ -2288,6 +2288,10 @@ rgb(var(--color-border-rgb) / 1.0); --border-radius: 0px;
     
     
   </div>
+
+  <button class="hero-carousel-template--20896892846166__hero1_KcpJL9__play-fallback" type="button" hidden>
+    Tap to play video
+  </button>
 
   <!-- ================= CONTENT OVERLAY ================= -->
   <div class="hero-carousel-template--20896892846166__hero1_KcpJL9__container">
@@ -2371,6 +2375,25 @@ rgb(var(--color-border-rgb) / 1.0); --border-radius: 0px;
     filter: saturate(1.08) contrast(1.04);
     visibility: visible !important;
     opacity: 1 !important;
+  }
+
+  .hero-carousel-template--20896892846166__hero1_KcpJL9__play-fallback {
+    position: absolute;
+    right: 18px;
+    bottom: 18px;
+    z-index: 4;
+    padding: 10px 16px;
+    border: 0;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.92);
+    color: #192844;
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  .hero-carousel-template--20896892846166__hero1_KcpJL9__play-fallback[hidden] {
+    display: none;
   }
 
   .hero-carousel-template--20896892846166__hero1_KcpJL9__placeholder {
@@ -2518,12 +2541,22 @@ rgb(var(--color-border-rgb) / 1.0); --border-radius: 0px;
 
     var slides = root.querySelectorAll('.hero-carousel-template--20896892846166__hero1_KcpJL9__slide');
     var dots = root.querySelectorAll('.hero-carousel-template--20896892846166__hero1_KcpJL9__dot');
+    var playFallback = root.querySelector('.hero-carousel-template--20896892846166__hero1_KcpJL9__play-fallback');
     var currentIndex = 0;
     var autoplay = root.getAttribute('data-autoplay') === 'true';
     var autoplaySpeed = parseInt(root.getAttribute('data-autoplay-speed'), 10) || 5000;
     var timer = null;
 
     if (slides.length <= 1) return; // nothing to rotate
+
+    slides.forEach(function (slide) {
+      var video = slide.querySelector('video');
+      if (video) {
+        video.addEventListener('playing', function () {
+          playFallback.hidden = true;
+        });
+      }
+    });
 
     function goToSlide(index) {
       slides[currentIndex].classList.remove('is-active');
@@ -2539,6 +2572,7 @@ rgb(var(--color-border-rgb) / 1.0); --border-radius: 0px;
         dots[currentIndex].classList.add('is-active');
         dots[currentIndex].setAttribute('aria-selected', 'true');
       }
+      playActiveVideo();
     }
 
     dots.forEach(function (dot, i) {
@@ -2555,11 +2589,48 @@ rgb(var(--color-border-rgb) / 1.0); --border-radius: 0px;
       }, autoplaySpeed);
     }
 
-    root.querySelectorAll('video').forEach(function (video) {
-      video.muted = true;
-      video.playsInline = true;
-      video.play().catch(function () {});
-    });
+    function playActiveVideo() {
+      if (document.visibilityState === 'hidden') return;
+
+      slides.forEach(function (slide) {
+        var video = slide.querySelector('video');
+        if (!video) return;
+
+        if (!slide.classList.contains('is-active')) {
+          video.pause();
+          return;
+        }
+
+        video.muted = true;
+        video.defaultMuted = true;
+        video.playsInline = true;
+        video.setAttribute('muted', '');
+        video.setAttribute('playsinline', '');
+        video.setAttribute('webkit-playsinline', '');
+
+        if (video.paused) {
+          video.play().catch(function (error) {
+            if (error.name === 'NotAllowedError') {
+              playFallback.hidden = false;
+            } else if (error.name !== 'AbortError') {
+              console.error('Hero video playback failed:', error);
+            }
+          });
+        }
+
+      });
+    }
+
+    playFallback.addEventListener('click', playActiveVideo);
+    playActiveVideo();
+    document.addEventListener('visibilitychange', playActiveVideo);
+    window.addEventListener('pageshow', playActiveVideo);
+    if ('PointerEvent' in window) {
+      document.addEventListener('pointerdown', playActiveVideo, { passive: true });
+    } else {
+      document.addEventListener('touchstart', playActiveVideo, { passive: true });
+    }
+    document.addEventListener('keydown', playActiveVideo);
 
     function resetAutoplay() {
       if (timer) clearInterval(timer);
