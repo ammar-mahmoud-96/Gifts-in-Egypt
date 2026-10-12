@@ -1,30 +1,82 @@
-# Shop.co Ecommerce
+# 🎁 Gifts in Egypt
 
-A responsive fashion e-commerce storefront built with ReactJS, Next.js, TypeScript, and Redux Toolkit. The project includes product discovery, filtering, pagination, cart management, checkout, order email delivery, and a responsive mobile checkout experience.
+A modern and responsive e-commerce platform for discovering and purchasing gifts online in Egypt. Built with **Next.js**, **React**, **TypeScript**, and **Redux Toolkit**, the application provides a complete shopping experience including product browsing, filtering, cart management, checkout, user authentication, online payments, and order tracking.
 
-## Features
+---
 
-- Homepage with hero content, brand strip, new arrivals, top-selling products, dress styles, testimonials, and newsletter section.
-- Product listing pages for all products, best sellers, new arrivals, and sale items.
-- Search products from the global header.
-- Filter the catalog by category, price, color, size, and dress style.
-- Pagination for product listing screens.
-- Product detail pages with cart controls.
-- Redux-powered cart with quantity controls and sale pricing.
-- Checkout with contact, delivery, discount, payment, and order summary sections.
-- Responsive checkout layout with a mobile order-summary drawer and fixed order action bar.
-- Firebase email/password sign-in 
-- Responsive customer profile dashboard.
-- Contact form and checkout order emails sent through SMTP.
+## ✨ Features
 
-## Technology
+### 🛍️ Shopping Experience
+- Home page with featured products and promotional sections.
+- Browse products by categories and collections.
+- Product search functionality.
+- Advanced product filtering:
+  - Category
+  - Price
+  - Color
+  - Size
+  - Style
+- Product detail pages with complete information.
+- Pagination for product listings.
 
-- **Next.js 13**: React framework, routing, static pages, and API routes.
-- **React 18**: UI components and stateful interactions.
-- **TypeScript**: Static typing across pages, components, store, and API handlers.
-- **Redux Toolkit**: Product and cart state management.
-- **React Redux**: Connects React components to the Redux store.
-- **Nodemailer**: Sends contact and order emails through SMTP.
-- **CSS**: Responsive layouts and component styling in `src/styles/globals.css`.
-- **Yarn**: Dependency installation and project scripts.
+### 🛒 Cart & Checkout
+- Redux-powered shopping cart.
+- Quantity management and price calculations.
+- Coupon and discount support.
+- Order summary and delivery information.
+- Mobile-friendly checkout experience.
+- Checkout order confirmation via email.
 
+### 👤 User Accounts
+- Firebase Authentication (Email & Password).
+- Customer profile dashboard.
+- User order history.
+- Secure user-specific order access. 
+
+### 💳 Payments
+- Paymob online payment integration.
+- Secure hosted payment iframe.
+- Support for online card payments.
+
+### 📧 Notifications
+- Contact form email notifications.
+- Checkout order emails using SMTP and Nodemailer.
+
+---
+
+## 🚀 Tech Stack
+
+### Frontend
+- Next.js 13
+- React 18
+- TypeScript
+- Redux Toolkit
+- React Redux
+
+### Backend & Services
+- Firebase Authentication
+- Firebase Firestore
+- Nodemailer
+- Paymob Payment Gateway
+
+### Styling
+- CSS
+- Responsive Design
+
+### Package Manager
+- Yarn 
+
+---
+
+## 📂 Project Structure
+
+```text
+src/
+├── components/      # Reusable UI components
+├── pages/           # Next.js pages and API routes
+├── store/           # Redux store and slices
+├── styles/          # Global styling
+├── types/           # Shared TypeScript types
+
+public/
+└── assets/          # Product and website assets
